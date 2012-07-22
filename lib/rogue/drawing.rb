@@ -1,19 +1,28 @@
 require 'curses'
 
-LINES = 20
-COLS  = 80
+LINES = 40
+COLS  = 140
 
 include Curses
-init_screen
-curs_set 0
-noecho
 
 module Drawing
   extend self
+  def init_curses
+    init_screen
+    curs_set 0
+    noecho
+  end
+
   def draw_entity(win, entity)
     win.setpos entity.y + 1, entity.x + 1
     win.addstr entity.char
     win.refresh
+  end
+
+  def debug(world, info)
+    win    = world.win
+    win.setpos LINES + 1, 2
+    win.addstr info
   end
 
   def draw_status(world, info=nil)
@@ -25,7 +34,7 @@ module Drawing
 
   def draw_dungeon(win, dungeon)
     win.setpos 1, 0
-    dungeon.lines.each do |line| win.addstr "|" + line + "|" end
+    dungeon.lines.each do |line| win.addstr WALL + line.join + WALL end
     win.refresh
   end
 

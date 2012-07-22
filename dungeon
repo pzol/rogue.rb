@@ -1,0 +1,10 @@
+#! /usr/bin/env ruby
+
+require_relative 'lib/rogue'
+
+
+dungeon = World.empty_dungeon(40, 140)
+
+
+dungeon.lines.each do |line| puts line.join end
+p World.monsters

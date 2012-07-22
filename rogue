@@ -1,0 +1,6 @@
+#! /usr/bin/env ruby
+require_relative 'lib/rogue'
+
+Drawing.init_curses
+game = Game.new(World.create)
+game.play
